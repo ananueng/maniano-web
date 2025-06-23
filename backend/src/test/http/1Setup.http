@@ -1,0 +1,242 @@
+### Create Block Project 1
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "title": "BLOCK",
+  "description": "init BLOCK description"
+}
+
+### Create PER Project 2
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "title": "PER",
+  "description": "init PER description"
+}
+
+### Create PICU Project 3
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "title": "PICU",
+  "description": "init PICU description"
+}
+
+### Create Trauma Project 4
+POST http://localhost:8080/api/projects
+Content-Type: application/json
+
+{
+  "title": "TRAUMA",
+  "description": "init TRAUMA description"
+}
+
+### Create BLOCK Schedule 1
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "name": "2020-2021",
+  "projectId": 1
+}
+
+### Create BLOCK Schedule 2 (id 2)
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "projectId": 1,
+  "name": "2024-2025"
+}
+
+### Create PICU Schedule 1 (id 3)
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "projectId": 3,
+  "name": "2024-2025"
+}
+
+### Create Trauma Schedule 1 (id 4)
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "projectId": 4,
+  "name": "2024-2025"
+}
+
+### Create Levels (Core Entity) File for BLOCK 2020-2021 (id 1)
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+  "scheduleId": 1,
+  "name": "Levels",
+  "fileType": "CORE_ENTITIES"
+}
+
+### Create Level Column for Levels File (id 1)
+POST http://localhost:8080/api/fileColumns
+Content-Type: application/json
+
+{
+  "fileId": 1,
+  "name": "Level"
+}
+
+### Create 4 Rows for Levels File (id 1)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 1
+}
+
+### Create 4 Rows for Levels File (id 2)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 1
+}
+
+### Create 4 Rows for Levels File (id 3)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 1
+}
+
+### Create 4 Rows for Levels File (id 4)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 1
+}
+
+### Create PGY1 Cell in Levels File (id 1)
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 1,
+  "fileColumnId": 1,
+  "value": "PGY1"
+}
+
+### Create PGY2 Cell in Levels File (id 2)
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 2,
+  "fileColumnId": 1,
+  "value": "PGY2"
+}
+
+### Create PGY3 Cell in Levels File (id 3)
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 3,
+  "fileColumnId": 1,
+  "value": "PGY3"
+}
+
+### Create PGY4 Cell in Levels File (id 4)
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 4,
+  "fileColumnId": 1,
+  "value": "PGY4"
+}
+
+### Create Residents (Core Entity) File for BLOCK 2020-2021 (id 1)
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+  "scheduleId": 1,
+  "name": "Residents",
+  "fileType": "CORE_ENTITIES"
+}
+
+### Create Name Column for Resident File (id 1)
+POST http://localhost:8080/api/fileColumns
+Content-Type: application/json
+
+{
+  "fileId": 2,
+  "name": "Resident Name"
+}
+
+### Create Level Column for Resident File (id 2)
+POST http://localhost:8080/api/fileColumns
+Content-Type: application/json
+
+{
+  "fileId": 2,
+  "name": "Level"
+}
+
+### Create 3 Rows for Residents File (id 1)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 2
+}
+
+### Create 3 Rows for Residents File (id 2)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 2
+}
+
+### Create 3 Rows for Residents File (id 3)
+POST http://localhost:8080/api/fileRows
+Content-Type: application/json
+
+{
+  "fileId": 2
+}
+### Create a cell for the name column with the value "Emily"
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 5,
+  "fileColumnId": 2,
+  "value": "Emily"
+}
+
+### Create a cell for the level column with the value "100"
+POST http://localhost:8080/api/fileCells
+Content-Type: application/json
+
+{
+  "fileRowId": 5,
+  "fileColumnId": 3,
+  "value": "100"
+}
+### Create ResEducationTypeF (Constraint) File for BLOCK 2020-2021 (id 1)
+POST http://localhost:8080/api/files
+Content-Type: application/json
+
+{
+  "scheduleId": 1,
+  "name": "ResEducationTypeF",
+  "fileType": "CONSTRAINTS"
+}

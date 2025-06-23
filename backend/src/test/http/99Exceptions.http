@@ -1,0 +1,5 @@
+### Find Invalid Project By ID
+GET http://localhost:8080/api/projects/2222
+
+### Find Invalid Schedule By ID
+GET http://localhost:8080/api/schedules/2222

@@ -1,0 +1,54 @@
+-- Used if spring.sql.init.mode=always in application.properties
+-- Must drop in reverse ownership order (i.e. children first, then parents)
+-- DROP TABLE IF EXISTS file_cell;
+-- DROP TABLE IF EXISTS file_row;
+-- DROP TABLE IF EXISTS file_column;
+-- DROP TABLE IF EXISTS file;
+-- DROP TABLE IF EXISTS play;
+-- DROP TABLE IF EXISTS song;
+--
+-- DROP SEQUENCE IF EXISTS file_cell_seq;
+-- DROP SEQUENCE IF EXISTS file_row_seq;
+-- DROP SEQUENCE IF EXISTS file_column_seq;
+-- DROP SEQUENCE IF EXISTS file_seq;
+-- DROP SEQUENCE IF EXISTS schedule_seq;
+-- DROP SEQUENCE IF EXISTS project_seq;
+--
+-- DROP SEQUENCE IF EXISTS seq;
+-- DROP SEQUENCE IF EXISTS seq_gen;
+
+
+-- OLD: Manually create tables (if using Spring Data JDBC instead of JPA)
+-- CREATE TABLE IF NOT EXISTS Project
+-- (
+--     id           SERIAL,
+--     project_type varchar(10)  NOT NULL,
+--     description  varchar(250),
+--     last_edited  timestamp,
+--     version      INT,
+--     PRIMARY KEY (id)
+-- );
+--
+-- CREATE TABLE IF NOT EXISTS Schedule
+-- (
+--     id            SERIAL,
+--     fileId    INT          NOT NULL,
+--     value         varchar(250) NOT NULL,
+--     last_edited   timestamp,
+--     due_date      timestamp,
+--     version       INT,
+--     PRIMARY KEY (fileId, id),
+--     FOREIGN KEY (fileId) REFERENCES Project(id) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE IF NOT EXISTS Template
+-- (
+--     id           INT          NOT NULL,
+--     value        varchar(250) NOT NULL,
+--     last_edited  timestamp    NOT NULL,
+--     due_date     timestamp    NOT NULL,
+--     priority     INT          NOT NULL,
+--     template_type varchar(10)  NOT NULL,
+--     version      INT,
+--     PRIMARY KEY (id)
+-- );

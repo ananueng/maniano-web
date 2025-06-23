@@ -1,0 +1,26 @@
+### CASCADE TEST 1: Delete BLOCK song (should cascade delete Schedules 1 and 2)
+DELETE http://localhost:8080/api/projects/1
+
+### INVALID: Get BLOCK Project when BLOCK doesn't exist anymore
+GET http://localhost:8080/api/projects/1
+
+### INVALID: Get BLOCK Schedule when BLOCK doesn't exist anymore
+GET http://localhost:8080/api/schedules/1
+
+### INVALID: Create BLOCK Schedule when BLOCK doesn't exist anymore
+POST http://localhost:8080/api/schedules
+Content-Type: application/json
+
+{
+  "projectId": 1,
+  "name": "test"
+}
+
+### NON-CASCADE TEST: Delete Trauma song (which doesn't have any schedules)
+DELETE http://localhost:8080/api/projects/4
+
+### CASCADE TEST 2: Delete BLOCK 2020-2021 play (should cascade delete File 1)
+DELETE http://localhost:8080/api/schedules/1
+
+### CASCADE TEST 3: Delete BLOCK 2020-2021 Levels table (should cascade delete rows 1-4 and column 1)
+DELETE http://localhost:8080/api/files/1

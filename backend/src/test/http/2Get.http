@@ -1,0 +1,41 @@
+### Find all Projects
+GET http://localhost:8080/api/projects
+
+### Final all Projects (for landing page)
+GET http://localhost:8080/api/projects/list
+
+### Final all Schedules (for navBar) in Project 1
+GET http://localhost:8080/api/projects/1/schedules
+
+### Find all Schedules
+GET http://localhost:8080/api/schedules
+
+### Final NavData for Schedule 1 in Project 1
+GET http://localhost:8080/api/schedules/1/nav
+
+### Find all Files
+GET http://localhost:8080/api/files
+
+### Find all Files of type CORE_ENTITY
+GET http://localhost:8080/api/files/type/CORE_ENTITY
+
+### Find all Files of type CONSTRAINT
+GET http://localhost:8080/api/files/type/CONSTRAINT
+
+### Find all Files of type METRIC
+GET http://localhost:8080/api/files/type/METRIC
+
+### Find all Files in Schedule 1 of type CORE_ENTITY
+GET http://localhost:8080/api/schedules/1/files/type/CORE_ENTITY
+
+### Find all Files in Schedule 1 of type CONSTRAINT
+GET http://localhost:8080/api/schedules/1/files/type/CONSTRAINT
+
+### Find all Files in Schedule 1 of type METRIC
+GET http://localhost:8080/api/schedules/1/files/type/METRIC
+
+### Find all Columns
+GET http://localhost:8080/api/fileColumns
+
+### Find all Rows
+GET http://localhost:8080/api/fileRows

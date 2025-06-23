@@ -1,0 +1,2 @@
+# Declare files that will always have LF line endings on checkout (to make it work on unix).
+backend/mvnw text eol=lf

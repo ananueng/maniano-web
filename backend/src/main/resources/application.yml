@@ -1,0 +1,20 @@
+spring:
+  datasource:
+#    docker or deployment
+#    url: jdbc:postgresql://postgresql:5432/maniano_db
+#    local
+    url: jdbc:postgresql://localhost:5432/maniano_db
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+        hibernate:
+          format_sql: false
+
+

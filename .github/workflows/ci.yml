@@ -1,0 +1,28 @@
+name: Full Test Suite
+on: [push, pull_request]
+jobs:
+  # frontend-tests:
+  #   runs-on: windows-2022
+  #   defaults:
+  #     run:
+  #       working-directory: frontend
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install dependencies
+  #       run: npm install
+  #     - name: Run tests
+  #       run: npm test
+  
+  backend-tests:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build and run tests
+        run: ./mvnw -B package --file pom.xml
+        working-directory: ./backend

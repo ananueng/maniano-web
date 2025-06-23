@@ -1,0 +1,17 @@
+### Get a Project by id
+GET http://localhost:8080/api/projects/2
+
+### Get a Project by ProjectName
+GET http://localhost:8080/api/projects/projectName/BLOCK
+
+### Get a Schedule by id
+GET http://localhost:8080/api/schedules/2
+
+### Get a File by id
+GET http://localhost:8080/api/files/1
+
+### Get a Column by id
+GET http://localhost:8080/api/fileColumns/1
+
+### Get a Row by id
+GET http://localhost:8080/api/fileRows/1

@@ -1,0 +1,59 @@
+### Update an existing Project that has Schedules
+PATCH http://localhost:8080/api/projects/2
+Content-Type: application/json
+
+{
+  "title": "BLOCK",
+  "description": "UPDATED DESCRIPTION"
+}
+
+### Update an existing Schedule
+PATCH http://localhost:8080/api/schedules/2
+Content-Type: application/json
+
+{
+  "name": "UPDATED NAME",
+  "dueDate": "2025-02-10T16:01:12.497678"
+}
+
+### Update an existing Schedule that has a Core Entity
+PATCH http://localhost:8080/api/schedules/1
+Content-Type: application/json
+
+{
+  "name": "UPDATED NAME",
+  "dueDate": "2025-02-10T16:01:12.497678"
+}
+
+### Update a non-existing Schedule
+PATCH http://localhost:8080/api/schedules/555
+Content-Type: application/json
+
+{
+  "name": "THIS SHOULDN'T WORK: UPDATED NAME",
+  "dueDate": "2025-02-10T16:01:12.497678"
+}
+
+### Update a File (change a Core Entity to a Constraint)
+PATCH http://localhost:8080/api/files/1
+Content-Type: application/json
+
+{
+  "type": "CONSTRAINT"
+}
+
+### Update a Column
+PATCH http://localhost:8080/api/fileColumns/1
+Content-Type: application/json
+
+{
+  "fileColumnType": "DATE"
+}
+
+#### Update a Row
+#PATCH http://localhost:8080/api/fileRows/1
+#Content-Type: application/json
+#
+#{
+#  "orderID": ...
+#}

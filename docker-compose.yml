@@ -1,0 +1,43 @@
+services:
+  postgres:
+    container_name: postgresql
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: maniano_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgres/data
+    networks:
+      - ananueng-network
+
+  spring-boot-app:
+    container_name: spring-boot-app
+    build: ./backend
+    ports:
+      - '8080:8080'
+    networks:
+      - ananueng-network
+    depends_on:
+      - postgres
+
+  frontend:
+    container_name: react-app
+    build: ./frontend
+    ports:
+      - '3039:3039'
+    volumes:
+      - node_modules:/app/node_modules
+    command: ["npm", "run", "dev"]
+    networks:
+      - ananueng-network
+
+volumes:
+  postgres:
+  node_modules:
+
+networks:
+  ananueng-network:
+    driver: bridge

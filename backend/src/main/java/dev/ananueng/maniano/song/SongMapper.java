@@ -21,7 +21,7 @@ public class SongMapper {
 
         Song song = new Song();
         song.setTitle(dto.title());
-        song.setDescription(dto.description());
+        song.setArtist(dto.artist());
         return song;
     }
 
@@ -32,7 +32,10 @@ public class SongMapper {
 
         return new SongRequestDto(
                 song.getTitle(),
-                song.getDescription()
+                song.getArtist(),
+                song.getViews(),
+                song.getLikes(),
+                song.getIsPublic()
         );
     }
 
@@ -44,7 +47,10 @@ public class SongMapper {
         return new SongResponseDto(
                 song.getId(),
                 song.getTitle(),
-                song.getDescription(),
+                song.getArtist(),
+                song.getViews(),
+                song.getLikes(),
+                song.getIsPublic(),
                 song.getCreatedBy(),
                 song.getCreatedAt(),
                 song.getLastModifiedBy(),

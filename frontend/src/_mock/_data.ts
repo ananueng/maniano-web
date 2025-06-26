@@ -2,9 +2,9 @@ import {
   _id,
   _price,
   _times,
-  _company,
+  _artist,
   _boolean,
-  _fullName,
+  _title,
   _taskNames,
   _postTitles,
   _description,
@@ -21,13 +21,13 @@ export const _myAccount = {
 
 // ----------------------------------------------------------------------
 
-export const _users = [...Array(24)].map((_, index) => ({
+export const _songs = [...Array(24)].map((_, index) => ({
   id: _id(index),
-  name: _fullName(index),
-  company: _company(index),
+  title: _title(index),
+  artist: _artist(index),
   isVerified: _boolean(index),
   avatarUrl: `/assets/images/avatar/avatar-${index + 1}.webp`,
-  status: index % 4 ? 'active' : 'banned',
+  isPublic: index % 4 ? 'public' : 'private',
   role:
     [
       'Leader',
@@ -56,7 +56,7 @@ export const _posts = [...Array(23)].map((_, index) => ({
   totalFavorites: 8870,
   postedAt: _times(index),
   author: {
-    name: _fullName(index),
+    name: _title(index),
     avatarUrl: `/assets/images/avatar/avatar-${index + 1}.webp`,
   },
 }));
@@ -173,7 +173,7 @@ export const _notifications = [
   },
   {
     id: _id(2),
-    title: _fullName(2),
+    title: _title(2),
     description: 'answered to your comment on the Minimal',
     avatarUrl: '/assets/images/avatar/avatar-2.webp',
     type: 'friend-interactive',

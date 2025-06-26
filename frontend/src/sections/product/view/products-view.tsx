@@ -5,9 +5,10 @@ import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 
-import { _products } from 'src/_mock';
+import { _posts, _products } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
+import { PostSearch } from '../post-search';
 import { ProductItem } from '../product-item';
 import { ProductSort } from '../product-sort';
 import { CartIcon } from '../product-cart-widget';
@@ -86,28 +87,21 @@ export function ProductsView() {
 
   return (
     <DashboardContent>
-      <CartIcon totalItems={8} />
+      {/* <CartIcon totalItems={8} /> */}
 
       <Typography variant="h4" sx={{ mb: 5 }}>
-        Products
+        Browse
       </Typography>
       <Box
         sx={{
           mb: 5,
           display: 'flex',
           alignItems: 'center',
-          flexWrap: 'wrap-reverse',
-          justifyContent: 'flex-end',
+          justifyContent: 'space-between',
         }}
       >
-        <Box
-          sx={{
-            my: 1,
-            gap: 1,
-            flexShrink: 0,
-            display: 'flex',
-          }}
-        >
+          <PostSearch posts={_posts} />
+
           <ProductFilters
             canReset={canReset}
             filters={filters}
@@ -125,7 +119,7 @@ export function ProductsView() {
             }}
           />
 
-          <ProductSort
+          {/* <ProductSort
             sortBy={sortBy}
             onSort={handleSort}
             options={[
@@ -134,8 +128,7 @@ export function ProductsView() {
               { value: 'priceDesc', label: 'Price: High-Low' },
               { value: 'priceAsc', label: 'Price: Low-High' },
             ]}
-          />
-        </Box>
+          /> */}
       </Box>
 
       <Grid container spacing={3}>

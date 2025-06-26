@@ -42,7 +42,7 @@
 //         Optional<ProjectResponseDto> savedProject = Optional.ofNullable(projectService.findById(1));
 //         assertThat(savedProject).isPresent();
 //         assertThat(savedProject.get().title()).isEqualTo("Integration Test Project");
-//         assertThat(savedProject.get().description()).isEqualTo("Description");
+//         assertThat(savedProject.get().artist()).isEqualTo("Description");
 //     }
 //
 //     @Test
@@ -60,7 +60,7 @@
 //         // THEN
 //         ProjectResponseDto updatedProject = projectService.findById(1);
 //         assertThat(updatedProject.title()).isEqualTo("Updated Title");
-//         assertThat(updatedProject.description()).isEqualTo("Updated Description");
+//         assertThat(updatedProject.artist()).isEqualTo("Updated Description");
 //     }
 //
 //     @Test

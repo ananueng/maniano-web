@@ -23,7 +23,7 @@
 -- (
 --     id           SERIAL,
 --     project_type varchar(10)  NOT NULL,
---     description  varchar(250),
+--     artist  varchar(250),
 --     last_edited  timestamp,
 --     version      INT,
 --     PRIMARY KEY (id)

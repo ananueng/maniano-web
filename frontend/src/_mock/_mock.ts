@@ -29,32 +29,32 @@ export const _times = (index: number) =>
     '08/09/2024',
   ][index];
 
-export const _fullName = (index: number) =>
+export const _title = (index: number) =>
   [
-    'Billy Stoltenberg',
-    'Eloise Ebert',
-    'Teresa Luettgen',
-    'Salvador Mayert',
-    'Dr. Guadalupe Rath',
-    'Kelvin Pouros',
-    'Thelma Langworth',
-    'Kristen Wunsch',
-    'Steve Welch',
-    'Brian Jacobs',
-    'Lillie Schultz',
-    'Mr. Conrad Spinka',
-    'Charlene Krajcik',
-    'Kerry Kuhlman',
-    'Betty Hammes',
-    'Tony Paucek PhD',
-    'Sherri Davis',
-    'Angel Rolfson-Kulas',
-    'Dr. Lee Doyle-Grant',
-    'Cheryl Romaguera',
-    'Billy Braun',
-    'Adam Trantow',
-    'Brandon Von',
-    'Willis Ankunding',
+    'Bohemian Rhapsody',
+    'Stairway to Heaven',
+    'Imagine',
+    'Hotel California',
+    'Smells Like Teen Spirit',
+    'Hey Jude',
+    'Sweet Child O\' Mine',
+    'Billie Jean',
+    'Like a Rolling Stone',
+    'Wonderwall',
+    'Let It Be',
+    'Purple Rain',
+    'Yesterday',
+    'Hallelujah',
+    'Losing My Religion',
+    'Comfortably Numb',
+    'No Woman, No Cry',
+    'Livin\' on a Prayer',
+    'What\'s Going On',
+    'Don\'t Stop Believin\'',
+    'Every Breath You Take',
+    'Africa',
+    'Back in Black',
+    'Shape of You',
   ][index];
 
 export const _price = (index: number) =>
@@ -63,32 +63,32 @@ export const _price = (index: number) =>
     25.93, 70.39, 23.11, 67.23, 14.31, 31.5, 26.72, 44.8, 37.87, 75.53,
   ][index];
 
-export const _company = (index: number) =>
+export const _artist = (index: number) =>
   [
-    'Medhurst, Moore and Franey',
-    'Hahn, Homenick and Lind',
-    'Larkin LLC',
-    'Stamm, Larson and Mertz',
-    'Spencer, Raynor and Langosh',
-    'Lehner - Feeney',
-    'Leuschke, Harris and Kuhlman',
-    'Gutmann - Kassulke',
-    'Turcotte - Runolfsson',
-    'Howe - Anderson',
-    'Sipes - Yost',
-    'Johns - Aufderhar',
-    'Schmidt LLC',
-    'Smitham - Gerlach',
-    'Waelchi - VonRueden',
-    'Padberg - Macejkovic',
-    'Lemke - Ferry',
-    'Koch and Sons',
-    'Klein - Rolfson',
-    'Weimann LLC',
-    'White, Cassin and Goldner',
-    'Mohr, Langworth and Hills',
-    'Mitchell, Volkman and Prosacco',
-    'Streich Group',
+    'Queen',                    // Bohemian Rhapsody
+    'Led Zeppelin',             // Stairway to Heaven
+    'John Lennon',              // Imagine
+    'Eagles',                   // Hotel California
+    'Nirvana',                  // Smells Like Teen Spirit
+    'The Beatles',              // Hey Jude
+    'Guns N\' Roses',           // Sweet Child O' Mine
+    'Michael Jackson',          // Billie Jean
+    'Bob Dylan',                // Like a Rolling Stone
+    'Oasis',                    // Wonderwall
+    'The Beatles',              // Let It Be
+    'Prince',                   // Purple Rain
+    'The Beatles',              // Yesterday
+    'Leonard Cohen',            // Hallelujah
+    'R.E.M.',                   // Losing My Religion
+    'Pink Floyd',               // Comfortably Numb
+    'Bob Marley & The Wailers', // No Woman, No Cry
+    'Bon Jovi',                 // Livin' on a Prayer
+    'Marvin Gaye',              // What's Going On
+    'Journey',                  // Don't Stop Believin'
+    'The Police',               // Every Breath You Take
+    'Toto',                     // Africa
+    'AC/DC',                    // Back in Black
+    'Ed Sheeran',               // Shape of You
   ][index];
 
 export const _boolean = (index: number) =>

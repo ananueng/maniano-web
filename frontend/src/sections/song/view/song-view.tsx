@@ -9,20 +9,20 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { _users } from 'src/_mock';
+import { _songs } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
 
 import { TableNoData } from '../table-no-data';
-import { UserTableRow } from '../user-table-row';
-import { UserTableHead } from '../user-table-head';
-import { TableEmptyRows } from '../table-empty-rows';
-import { UserTableToolbar } from '../user-table-toolbar';
+import { SongTableRow } from '../song-table-row';
+import { SongTableHead } from '../song-table-head';
+import { TableEmptyRows } from '../song-empty-rows';
+import { SongTableToolbar } from '../song-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
-import type { UserProps } from '../user-table-row';
+import type { SongProps } from '../song-table-row';
 
 // ----------------------------------------------------------------------
 
@@ -31,8 +31,8 @@ export function SongView() {
 
   const [filterName, setFilterName] = useState('');
 
-  const dataFiltered: UserProps[] = applyFilter({
-    inputData: _users,
+  const dataFiltered: SongProps[] = applyFilter({
+    inputData: _songs,
     comparator: getComparator(table.order, table.orderBy),
     filterName,
   });
@@ -61,7 +61,7 @@ export function SongView() {
       </Box>
 
       <Card>
-        <UserTableToolbar
+        <SongTableToolbar
           numSelected={table.selected.length}
           filterName={filterName}
           onFilterName={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,25 +73,25 @@ export function SongView() {
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table sx={{ minWidth: 800 }}>
-              <UserTableHead
+              <SongTableHead
                 order={table.order}
                 orderBy={table.orderBy}
-                rowCount={_users.length}
+                rowCount={_songs.length}
                 numSelected={table.selected.length}
                 onSort={table.onSort}
                 onSelectAllRows={(checked) =>
                   table.onSelectAllRows(
                     checked,
-                    _users.map((user) => user.id)
+                    _songs.map((user) => user.id)
                   )
                 }
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
+                  { id: 'title', label: 'Title' },
+                  { id: 'artist', label: 'Artist' },
+                  // { id: 'role', label: 'Role' },
+                  // { id: 'isVerified', label: 'Verified', align: 'center' },
                   { id: 'status', label: 'Status' },
-                  { id: '' },
+                  { id: '' }, // for the action column
                 ]}
               />
               <TableBody>
@@ -101,7 +101,7 @@ export function SongView() {
                     table.page * table.rowsPerPage + table.rowsPerPage
                   )
                   .map((row) => (
-                    <UserTableRow
+                    <SongTableRow
                       key={row.id}
                       row={row}
                       selected={table.selected.includes(row.id)}
@@ -111,7 +111,7 @@ export function SongView() {
 
                 <TableEmptyRows
                   height={68}
-                  emptyRows={emptyRows(table.page, table.rowsPerPage, _users.length)}
+                  emptyRows={emptyRows(table.page, table.rowsPerPage, _songs.length)}
                 />
 
                 {notFound && <TableNoData searchQuery={filterName} />}
@@ -123,7 +123,7 @@ export function SongView() {
         <TablePagination
           component="div"
           page={table.page}
-          count={_users.length}
+          count={_songs.length}
           rowsPerPage={table.rowsPerPage}
           onPageChange={table.onChangePage}
           rowsPerPageOptions={[5, 10, 25]}

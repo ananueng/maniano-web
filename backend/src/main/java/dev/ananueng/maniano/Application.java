@@ -29,8 +29,8 @@ public class Application {
 	CommandLineRunner runner(SongService songService, PlayService playService, FileService fileService) {
 		return args -> {
 			// Songs
-			songService.create(new SongRequestDto("First song", "init description"));
-			songService.create(new SongRequestDto("Second song", "init description"));
+			songService.create(new SongRequestDto("First song", "init artist"));
+			songService.create(new SongRequestDto("Second song", "init artist"));
 
 			// Plays
 			playService.create(new PlayRequestDto("First play", 1, null));

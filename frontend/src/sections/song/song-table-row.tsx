@@ -15,23 +15,23 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export type UserProps = {
+export type SongProps = {
   id: string;
-  name: string;
+  title: string;
+  artist: string;
   role: string;
-  status: string;
-  company: string;
+  isPublic: string;
   avatarUrl: string;
   isVerified: boolean;
 };
 
-type UserTableRowProps = {
-  row: UserProps;
+type SongTableRowProps = {
+  row: SongProps;
   selected: boolean;
   onSelectRow: () => void;
 };
 
-export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) {
+export function SongTableRow({ row, selected, onSelectRow }: SongTableRowProps) {
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
 
   const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
@@ -57,25 +57,25 @@ export function UserTableRow({ row, selected, onSelectRow }: UserTableRowProps) 
               alignItems: 'center',
             }}
           >
-            <Avatar alt={row.name} src={row.avatarUrl} />
-            {row.name}
+            {/* <Avatar alt={row.title} src={row.avatarUrl} /> */}
+            {row.title}
           </Box>
         </TableCell>
 
-        <TableCell>{row.company}</TableCell>
+        <TableCell>{row.artist}</TableCell>
 
-        <TableCell>{row.role}</TableCell>
+        {/* <TableCell>{row.role}</TableCell> */}
 
-        <TableCell align="center">
+        {/* <TableCell align="center">
           {row.isVerified ? (
             <Iconify width={22} icon="solar:check-circle-bold" sx={{ color: 'success.main' }} />
           ) : (
             '-'
           )}
-        </TableCell>
+        </TableCell> */}
 
         <TableCell>
-          <Label color={(row.status === 'banned' && 'error') || 'success'}>{row.status}</Label>
+          <Label color={(row.isPublic === 'private' && 'default') || 'success'}>{row.isPublic}</Label>
         </TableCell>
 
         <TableCell align="right">

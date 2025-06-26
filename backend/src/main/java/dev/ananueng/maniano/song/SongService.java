@@ -48,8 +48,12 @@ public class SongService {
         if (songRequestDto.title() != null) {
             existingSong.setTitle(songRequestDto.title());
         }
-        if (songRequestDto.description() != null) {
-            existingSong.setDescription(songRequestDto.description());
+        if (songRequestDto.artist() != null) {
+            existingSong.setArtist(songRequestDto.artist());
+        }
+        // don't edit likes/views manually
+        if (songRequestDto.isPublic() != null) {
+            existingSong.setIsPublic(songRequestDto.isPublic());
         }
         songRepository.save(existingSong);
     }

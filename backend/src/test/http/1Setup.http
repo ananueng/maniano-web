@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "title": "BLOCK",
-  "description": "init BLOCK description"
+  "description": "init BLOCK artist"
 }
 
 ### Create PER Project 2
@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
   "title": "PER",
-  "description": "init PER description"
+  "description": "init PER artist"
 }
 
 ### Create PICU Project 3
@@ -22,7 +22,7 @@ Content-Type: application/json
 
 {
   "title": "PICU",
-  "description": "init PICU description"
+  "description": "init PICU artist"
 }
 
 ### Create Trauma Project 4
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
   "title": "TRAUMA",
-  "description": "init TRAUMA description"
+  "description": "init TRAUMA artist"
 }
 
 ### Create BLOCK Schedule 1

@@ -8,7 +8,10 @@ import java.util.List;
 public record SongResponseDto(
         Integer id,
         String title,
-        String description,
+        String artist,
+        Integer views,
+        Integer likes,
+        Boolean isPublic,
         String createdBy,
         LocalDateTime createdAt,
         String lastModifiedBy,

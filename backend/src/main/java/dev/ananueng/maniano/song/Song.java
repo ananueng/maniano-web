@@ -27,7 +27,10 @@ public class Song extends BaseEntity {
     // private SongType title;
 
     private String title;
-    private String description;
+    private String artist;
+    private Integer views;
+    private Integer likes;
+    private Boolean isPublic;
 
     @Version
     private Integer version;

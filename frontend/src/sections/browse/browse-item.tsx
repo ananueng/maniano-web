@@ -6,18 +6,15 @@ import { varAlpha } from 'minimal-shared/utils';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 
-import { fDate } from 'src/utils/format-time';
 import { fShortenNumber } from 'src/utils/format-number';
 
 import { Iconify } from 'src/components/iconify';
-import { SvgColor } from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
 
-export type ISongItem = {
+export type IBrowseItem = {
   id: string;
   title: string;
   artist: string;
@@ -31,14 +28,14 @@ export type ISongItem = {
   totalFavorites: number;
 };
 
-export function SongItem({
+export function BrowseItem({
   sx,
   song,
   latestSong,
   latestSongLarge,
   ...other
 }: CardProps & {
-  song: ISongItem;
+  song: IBrowseItem;
   latestSong: boolean;
   latestSongLarge: boolean;
 }) {
@@ -64,12 +61,11 @@ export function SongItem({
       variant="subtitle2"
       underline="hover"
       sx={{
-        height: 44,
         overflow: 'hidden',
         WebkitLineClamp: 2,
         display: '-webkit-box',
         WebkitBoxOrient: 'vertical',
-        ...(latestSongLarge && { typography: 'h5', height: 60 }),
+        ...(latestSongLarge && { typography: 'h5' }),
         ...((latestSongLarge || latestSong) && {
           color: 'common.white',
         }),
@@ -91,9 +87,9 @@ export function SongItem({
       }}
     >
       {[
-        { number: song.totalComments, icon: 'solar:chat-round-dots-bold' },
         { number: song.totalViews, icon: 'solar:eye-bold' },
-        { number: song.totalShares, icon: 'solar:share-bold' },
+        { number: song.totalFavorites, icon: 'solar:star-bold' },
+        // { number: song.totalShares, icon: 'solar:share-bold' },
       ].map((info, _index) => (
         <Box
           key={_index}
@@ -127,12 +123,12 @@ export function SongItem({
     />
   );
 
-  const renderDate = (
+  const renderArtist = (
     <Typography
       variant="caption"
       component="div"
       sx={{
-        mb: 1,
+        mt: 1,
         color: 'text.disabled',
         ...((latestSongLarge || latestSong) && {
           opacity: 0.48,
@@ -140,25 +136,25 @@ export function SongItem({
         }),
       }}
     >
-      {fDate(song.postedAt)}
+      {song.artist}
     </Typography>
   );
 
-  const renderShape = (
-    <SvgColor
-      src="/assets/icons/shape-avatar.svg"
-      sx={{
-        left: 0,
-        width: 88,
-        zIndex: 9,
-        height: 36,
-        // bottom: -16,
-        position: 'absolute',
-        color: 'background.paper',
-        ...((latestSongLarge || latestSong) && { display: 'none' }),
-      }}
-    />
-  );
+  // const renderShape = (
+  //   <SvgColor
+  //     src="/assets/icons/shape-avatar.svg"
+  //     sx={{
+  //       left: 0,
+  //       width: 88,
+  //       zIndex: 9,
+  //       height: 36,
+  //       // bottom: -16,
+  //       position: 'absolute',
+  //       color: 'background.paper',
+  //       ...((latestSongLarge || latestSong) && { display: 'none' }),
+  //     }}
+  //   />
+  // );
 
   return (
     <Card sx={sx} {...other}>
@@ -200,8 +196,8 @@ export function SongItem({
           }),
         })}
       >
-        {renderDate}
         {renderTitle}
+        {renderArtist}
         {renderInfo}
       </Box>
     </Card>

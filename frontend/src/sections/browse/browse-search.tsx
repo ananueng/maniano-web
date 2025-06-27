@@ -10,7 +10,7 @@ import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-type ProductSearchProps = {
+type BrowseSearchProps = {
   songs: ISongItem[];
   sx?: SxProps<Theme>;
 };
@@ -22,7 +22,7 @@ type ISongItem = {
   isPublic: string;
 };
 
-export function ProductSearch({ songs, sx }: ProductSearchProps) {
+export function BrowseSearch({ songs, sx }: BrowseSearchProps) {
   return (
     <Autocomplete
       sx={{ width: 280 }}

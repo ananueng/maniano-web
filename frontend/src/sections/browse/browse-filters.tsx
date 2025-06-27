@@ -4,7 +4,7 @@ import Radio from '@mui/material/Radio';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
-import Rating from '@mui/material/Rating';
+import { TextField } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
@@ -15,19 +15,22 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { Iconify } from 'src/components/iconify';
 import { Scrollbar } from 'src/components/scrollbar';
-import { ColorPicker } from 'src/components/color-utils';
+
+// ----------------------------------------------------------------------
+
+// ...existing imports...
 
 // ----------------------------------------------------------------------
 
 export type FiltersProps = {
-  price: string;
-  rating: string;
-  gender: string[];
-  colors: string[];
-  category: string;
+  artist: string[];
+  isPublic: string;
+  minViews: number;
+  minFavorites: number;
+  genre: string;
 };
 
-type ProductFiltersProps = {
+type BrowseFiltersProps = {
   canReset: boolean;
   openFilter: boolean;
   filters: FiltersProps;
@@ -36,15 +39,13 @@ type ProductFiltersProps = {
   onResetFilter: () => void;
   onSetFilters: (updateState: Partial<FiltersProps>) => void;
   options: {
-    colors: string[];
-    ratings: string[];
+    artists: { value: string; label: string }[];
     categories: { value: string; label: string }[];
-    genders: { value: string; label: string }[];
-    price: { value: string; label: string }[];
+    isPublic: { value: string; label: string }[];
   };
 };
 
-export function ProductFilters({
+export function BrowseFilters({
   filters,
   options,
   canReset,
@@ -53,23 +54,23 @@ export function ProductFilters({
   onOpenFilter,
   onCloseFilter,
   onResetFilter,
-}: ProductFiltersProps) {
-  const renderGender = (
+}: BrowseFiltersProps) {
+  const renderArtist = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Gender</Typography>
+      <Typography variant="subtitle2">Artist</Typography>
       <FormGroup>
-        {options.genders.map((option) => (
+        {options.artists.map((option) => (
           <FormControlLabel
             key={option.value}
             control={
               <Checkbox
-                checked={filters.gender.includes(option.value)}
+                checked={filters.artist.includes(option.value)}
                 onChange={() => {
-                  const checked = filters.gender.includes(option.value)
-                    ? filters.gender.filter((value) => value !== option.value)
-                    : [...filters.gender, option.value];
+                  const checked = filters.artist.includes(option.value)
+                    ? filters.artist.filter((value) => value !== option.value)
+                    : [...filters.artist, option.value];
 
-                  onSetFilters({ gender: checked });
+                  onSetFilters({ artist: checked });
                 }}
               />
             }
@@ -80,9 +81,9 @@ export function ProductFilters({
     </Stack>
   );
 
-  const renderCategory = (
+  const renderGenre = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Category</Typography>
+      <Typography variant="subtitle2">Genre</Typography>
       <RadioGroup>
         {options.categories.map((option) => (
           <FormControlLabel
@@ -90,8 +91,8 @@ export function ProductFilters({
             value={option.value}
             control={
               <Radio
-                checked={filters.category.includes(option.value)}
-                onChange={() => onSetFilters({ category: option.value })}
+                checked={filters.genre === option.value}
+                onChange={() => onSetFilters({ genre: option.value })}
               />
             }
             label={option.label}
@@ -101,30 +102,18 @@ export function ProductFilters({
     </Stack>
   );
 
-  const renderColors = (
+  const renderIsPublic = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Colors</Typography>
-      <ColorPicker
-        options={options.colors}
-        value={filters.colors}
-        onChange={(colors) => onSetFilters({ colors: colors as string[] })}
-        limit={6}
-      />
-    </Stack>
-  );
-
-  const renderPrice = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Price</Typography>
+      <Typography variant="subtitle2">Visibility</Typography>
       <RadioGroup>
-        {options.price.map((option) => (
+        {options.isPublic.map((option) => (
           <FormControlLabel
             key={option.value}
             value={option.value}
             control={
               <Radio
-                checked={filters.price.includes(option.value)}
-                onChange={() => onSetFilters({ price: option.value })}
+                checked={filters.isPublic === option.value}
+                onChange={() => onSetFilters({ isPublic: option.value })}
               />
             }
             label={option.label}
@@ -134,35 +123,40 @@ export function ProductFilters({
     </Stack>
   );
 
-  const renderRating = (
+  const renderMinViews = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2" sx={{ mb: 2 }}>
-        Rating
-      </Typography>
+      <Typography variant="subtitle2">Minimum Views</Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          type="number"
+          size="small"
+          slotProps={{ htmlInput: { 'min': 0 } }} 
+          defaultValue={0}
+          value={filters.minViews}
+          onChange={(e) => onSetFilters({ minViews: Number(e.target.value) })}
+          sx={{ width: 100, marginRight: 1 }}
+        />
+        <Typography variant="caption">views</Typography>
+      </Box>
+    </Stack>
+  );
 
-      {options.ratings.map((option, index) => (
-        <Box
-          key={option}
-          onClick={() => onSetFilters({ rating: option })}
-          sx={{
-            mb: 1,
-            gap: 1,
-            ml: -1,
-            p: 0.5,
-            display: 'flex',
-            borderRadius: 1,
-            cursor: 'pointer',
-            typography: 'body2',
-            alignItems: 'center',
-            '&:hover': { opacity: 0.48 },
-            ...(filters.rating === option && {
-              bgcolor: 'action.selected',
-            }),
-          }}
-        >
-          <Rating readOnly value={4 - index} /> & Up
-        </Box>
-      ))}
+  const renderMinFavorites = (
+    <Stack spacing={1}>
+      <Typography variant="subtitle2">Minimum Favorites</Typography>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <TextField
+          type="number"
+          size="small"
+          slotProps={{ htmlInput: { 'min': 0 } }} 
+          defaultValue={0}
+          value={filters.minFavorites}
+          onChange={(e) => onSetFilters({ minFavorites: Number(e.target.value) })}
+          sx={{ width: 100, marginRight: 1 }}
+          variant="outlined"
+        />
+        <Typography variant="caption">favorites</Typography>
+      </Box>
     </Stack>
   );
 
@@ -219,11 +213,11 @@ export function ProductFilters({
 
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
-            {renderGender}
-            {renderCategory}
-            {renderColors}
-            {renderPrice}
-            {renderRating}
+            {renderArtist}
+            {renderGenre}
+            {renderIsPublic}
+            {renderMinViews}
+            {renderMinFavorites}
           </Stack>
         </Scrollbar>
       </Drawer>

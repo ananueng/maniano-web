@@ -1,4 +1,3 @@
-import { Label } from 'src/components/label';
 import { SvgColor } from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
@@ -14,24 +13,24 @@ export type NavItem = {
 
 export const navData = [
   {
-    title: 'Songs',
+    title: 'Browse',
     path: '/',
-    icon: icon('ic-analytics'),
-  },
-  {
-    title: 'Editor',
-    path: '/editor',
-    icon: icon('ic-user'),
-  },
-  {
-    title: 'Product',
-    path: '/products',
     icon: icon('ic-cart'),
     // info: (
     //   <Label color="error" variant="inverted">
     //     +3
     //   </Label>
     // ),
+  },
+  {
+    title: 'My Songs',
+    path: '/mySongs',
+    icon: icon('ic-user'),
+  },
+  {
+    title: 'Editor',
+    path: '/editor',
+    icon: icon('ic-analytics'),
   },
   {
     title: 'Blog',

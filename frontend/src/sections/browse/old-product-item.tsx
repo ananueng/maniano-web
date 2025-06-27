@@ -1,14 +1,14 @@
+import type { IconifyName } from 'src/components/iconify';
+
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { fCurrency, fShortenNumber } from 'src/utils/format-number';
+import { fShortenNumber } from 'src/utils/format-number';
 
-import { Label } from 'src/components/label';
-import { ColorPreview } from 'src/components/color-utils';
-import { Iconify, IconifyName } from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 

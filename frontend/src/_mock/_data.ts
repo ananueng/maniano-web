@@ -2,9 +2,8 @@ import {
   _id,
   _price,
   _times,
-  _artist,
-  _boolean,
   _title,
+  _artist,
   _taskNames,
   _postTitles,
   _description,
@@ -21,34 +20,40 @@ export const _myAccount = {
 
 // ----------------------------------------------------------------------
 
-export const _songs = [...Array(24)].map((_, index) => ({
-  id: _id(index),
-  title: _title(index),
-  artist: _artist(index),
-  postedAt: _times(index),
-  avatarUrl: `/assets/images/avatar/avatar-${index + 1}.webp`,
-  coverUrl: `/assets/images/cover/cover-${index + 1}.webp`,
-  isPublic: index % 4 ? 'public' : 'private',
-  totalViews: 8829,
-  totalComments: 7977,
-  totalShares: 8556,
-  totalFavorites: 8870,
-  
-  // isVerified: _boolean(index),
-  // role:
-  //   [
-  //     'Leader',
-  //     'Hr Manager',
-  //     'UI Designer',
-  //     'UX Designer',
-  //     'UI/UX Designer',
-  //     'Project Manager',
-  //     'Backend Developer',
-  //     'Full Stack Designer',
-  //     'Front End Developer',
-  //     'Full Stack Developer',
-  //   ][index] || 'UI Designer',
-}));
+export const _songs = [...Array(24)].map((_, index) => {
+  const totalViews = Math.floor(Math.random() * 10000) + 1000;
+  const totalComments = Math.floor(Math.random() * totalViews);
+  const totalShares = Math.floor(Math.random() * totalViews);
+  const totalFavorites = Math.floor(Math.random() * totalViews);
+
+  return {
+    id: _id(index),
+    title: _title(index),
+    artist: _artist(index),
+    postedAt: _times(index),
+    avatarUrl: `/assets/images/avatar/avatar-${index + 1}.webp`,
+    coverUrl: `/assets/images/cover/cover-${index + 1}.webp`,
+    isPublic: index % 4 ? 'public' : 'private',
+    totalViews,
+    totalComments,
+    totalShares,
+    totalFavorites,
+    // isVerified: _boolean(index),
+    // role:
+    //   [
+    //     'Leader',
+    //     'Hr Manager',
+    //     'UI Designer',
+    //     'UX Designer',
+    //     'UI/UX Designer',
+    //     'Project Manager',
+    //     'Backend Developer',
+    //     'Full Stack Designer',
+    //     'Front End Developer',
+    //     'Full Stack Developer',
+    //   ][index] || 'UI Designer',
+  };
+});
 
 // ----------------------------------------------------------------------
 

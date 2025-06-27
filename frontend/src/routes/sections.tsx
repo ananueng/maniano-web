@@ -16,7 +16,7 @@ export const SongsPage = lazy(() => import('src/pages/songs'));
 export const BlogPage = lazy(() => import('src/pages/blog'));
 export const EditorPage = lazy(() => import('src/pages/editor'));
 export const SignInPage = lazy(() => import('src/pages/sign-in'));
-export const ProductsPage = lazy(() => import('src/pages/products'));
+export const BrowsePage = lazy(() => import('src/pages/browse'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
 const renderFallback = () => (
@@ -49,9 +49,9 @@ export const routesSection: RouteObject[] = [
       </DashboardLayout>
     ),
     children: [
-      { index: true, element: <SongsPage /> },
+      { index: true, element: <BrowsePage /> },
+      { path: 'mySongs', element: <SongsPage /> },
       { path: 'editor', element: <EditorPage /> },
-      { path: 'products', element: <ProductsPage /> },
       { path: 'blog', element: <BlogPage /> },
     ],
   },

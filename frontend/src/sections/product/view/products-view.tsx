@@ -5,13 +5,12 @@ import Grid from '@mui/material/Grid';
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 
-import { _posts, _products } from 'src/_mock';
+import { _posts, _products, _songs } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
-import { PostSearch } from '../post-search';
-import { ProductItem } from '../product-item';
+import { SongItem } from '../product-item';
 import { ProductSort } from '../product-sort';
-import { CartIcon } from '../product-cart-widget';
+import { ProductSearch } from '../product-search';
 import { ProductFilters } from '../product-filters';
 
 import type { FiltersProps } from '../product-filters';
@@ -100,8 +99,14 @@ export function ProductsView() {
           justifyContent: 'space-between',
         }}
       >
-          <PostSearch posts={_posts} />
-
+        <ProductSearch songs={_songs} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 2,
+          }}
+        >
           <ProductFilters
             canReset={canReset}
             filters={filters}
@@ -119,7 +124,7 @@ export function ProductsView() {
             }}
           />
 
-          {/* <ProductSort
+          <ProductSort
             sortBy={sortBy}
             onSort={handleSort}
             options={[
@@ -128,13 +133,14 @@ export function ProductsView() {
               { value: 'priceDesc', label: 'Price: High-Low' },
               { value: 'priceAsc', label: 'Price: Low-High' },
             ]}
-          /> */}
+          />
+        </Box>
       </Box>
 
       <Grid container spacing={3}>
-        {_products.map((product) => (
-          <Grid key={product.id} size={{ xs: 12, sm: 6, md: 3 }}>
-            <ProductItem product={product} />
+        {_songs.map((song) => (
+          <Grid key={song.id} size={{ xs: 12, sm: 6, md: 3 }}>
+            <SongItem song={song} latestSong={false} latestSongLarge={false}/>
           </Grid>
         ))}
       </Grid>

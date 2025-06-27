@@ -25,22 +25,29 @@ export const _songs = [...Array(24)].map((_, index) => ({
   id: _id(index),
   title: _title(index),
   artist: _artist(index),
-  isVerified: _boolean(index),
+  postedAt: _times(index),
   avatarUrl: `/assets/images/avatar/avatar-${index + 1}.webp`,
+  coverUrl: `/assets/images/cover/cover-${index + 1}.webp`,
   isPublic: index % 4 ? 'public' : 'private',
-  role:
-    [
-      'Leader',
-      'Hr Manager',
-      'UI Designer',
-      'UX Designer',
-      'UI/UX Designer',
-      'Project Manager',
-      'Backend Developer',
-      'Full Stack Designer',
-      'Front End Developer',
-      'Full Stack Developer',
-    ][index] || 'UI Designer',
+  totalViews: 8829,
+  totalComments: 7977,
+  totalShares: 8556,
+  totalFavorites: 8870,
+  
+  // isVerified: _boolean(index),
+  // role:
+  //   [
+  //     'Leader',
+  //     'Hr Manager',
+  //     'UI Designer',
+  //     'UX Designer',
+  //     'UI/UX Designer',
+  //     'Project Manager',
+  //     'Backend Developer',
+  //     'Full Stack Designer',
+  //     'Front End Developer',
+  //     'Full Stack Developer',
+  //   ][index] || 'UI Designer',
 }));
 
 // ----------------------------------------------------------------------

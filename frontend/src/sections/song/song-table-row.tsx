@@ -19,10 +19,7 @@ export type SongProps = {
   id: string;
   title: string;
   artist: string;
-  role: string;
   isPublic: string;
-  avatarUrl: string;
-  isVerified: boolean;
 };
 
 type SongTableRowProps = {

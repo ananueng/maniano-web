@@ -6,32 +6,23 @@ import Autocomplete, { autocompleteClasses } from '@mui/material/Autocomplete';
 
 import { Iconify } from 'src/components/iconify';
 
-// import type { IPostItem } from './post-item';
+// import type { IsongItem } from './song-item';
 
 // ----------------------------------------------------------------------
 
-type PostSearchProps = {
-  posts: IPostItem[];
+type ProductSearchProps = {
+  songs: ISongItem[];
   sx?: SxProps<Theme>;
 };
 
-type IPostItem = {
+type ISongItem = {
   id: string;
   title: string;
-  coverUrl: string;
-  totalViews: number;
-  description: string;
-  totalShares: number;
-  totalComments: number;
-  totalFavorites: number;
-  postedAt: string | number | null;
-  author: {
-    name: string;
-    avatarUrl: string;
-  };
+  artist: string;
+  isPublic: string;
 };
 
-export function PostSearch({ posts, sx }: PostSearchProps) {
+export function ProductSearch({ songs, sx }: ProductSearchProps) {
   return (
     <Autocomplete
       sx={{ width: 280 }}
@@ -48,13 +39,13 @@ export function PostSearch({ posts, sx }: PostSearchProps) {
           },
         },
       }}
-      options={posts}
-      getOptionLabel={(post) => post.title}
+      options={songs}
+      getOptionLabel={(song) => song.title}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       renderInput={(params) => (
         <TextField
           {...params}
-          placeholder="Search post..."
+          placeholder="Search song..."
           slotProps={{
             input: {
               ...params.InputProps,

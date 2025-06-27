@@ -154,7 +154,7 @@ export function PostItem({
         width: 88,
         zIndex: 9,
         height: 36,
-        bottom: -16,
+        // bottom: -16,
         position: 'absolute',
         color: 'background.paper',
         ...((latestPostLarge || latestPost) && { display: 'none' }),
@@ -187,14 +187,14 @@ export function PostItem({
           }),
         })}
       >
-        {renderShape}
-        {renderAvatar}
+        {/* {renderShape} */}
+        {/* {renderAvatar} */}
         {renderCover}
       </Box>
 
       <Box
         sx={(theme) => ({
-          p: theme.spacing(6, 3, 3, 3),
+          p: theme.spacing(2, 2, 2, 2),
           ...((latestPostLarge || latestPost) && {
             width: 1,
             bottom: 0,

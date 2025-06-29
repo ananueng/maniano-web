@@ -18,10 +18,6 @@ import { Scrollbar } from 'src/components/scrollbar';
 
 // ----------------------------------------------------------------------
 
-// ...existing imports...
-
-// ----------------------------------------------------------------------
-
 export type FiltersProps = {
   artist: string[];
   isPublic: string;

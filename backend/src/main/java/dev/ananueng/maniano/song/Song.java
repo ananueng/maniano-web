@@ -25,11 +25,13 @@ public class Song extends BaseEntity {
 
     // @Enumerated(EnumType.STRING)
     // private SongType title;
-
     private String title;
     private String artist;
-    private Integer views;
-    private Integer likes;
+    private String assetsUrl;
+    private String coverUrl;
+    private Integer totalViews;
+    private Integer totalLikes;
+    private Integer totalFavorites;
     private Boolean isPublic;
 
     @Version

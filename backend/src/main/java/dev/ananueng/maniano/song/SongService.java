@@ -51,6 +51,21 @@ public class SongService {
         if (songRequestDto.artist() != null) {
             existingSong.setArtist(songRequestDto.artist());
         }
+        if (songRequestDto.assetsUrl() != null) {
+            existingSong.setAssetsUrl(songRequestDto.assetsUrl());
+        }
+        if (songRequestDto.coverUrl() != null) {
+            existingSong.setCoverUrl(songRequestDto.coverUrl());
+        }
+        if (songRequestDto.totalViews() != null) {
+            existingSong.setTotalViews(songRequestDto.totalViews());
+        }
+        if (songRequestDto.totalLikes() != null) {
+            existingSong.setTotalLikes(songRequestDto.totalLikes());
+        }
+        if (songRequestDto.totalFavorites() != null) {
+            existingSong.setTotalFavorites(songRequestDto.totalFavorites());
+        }
         // don't edit likes/views manually
         if (songRequestDto.isPublic() != null) {
             existingSong.setIsPublic(songRequestDto.isPublic());

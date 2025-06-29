@@ -3,7 +3,10 @@ package dev.ananueng.maniano.song;
 public record SongRequestDto(
         String title,
         String artist,
-        Integer views,
-        Integer likes,
+        String assetsUrl,
+        String coverUrl,
+        Integer totalViews,
+        Integer totalLikes,
+        Integer totalFavorites,
         Boolean isPublic
 ) {}

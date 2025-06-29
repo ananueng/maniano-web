@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 
+import { _songs } from 'src/_mock';
 import { DashboardContent } from 'src/layouts/dashboard';
 
 import { BrowseItem } from '../browse-item';
@@ -13,7 +14,7 @@ import { BrowseSearch } from '../browse-search';
 import { BrowseFilters } from '../browse-filters';
 
 import type { IBrowseItem } from '../browse-item';
-import type { FiltersProps} from '../browse-filters';
+import type { FiltersProps } from '../browse-filters';
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -21,7 +22,6 @@ type Props = {
 };
 
 const ARTIST_OPTIONS = [
-  { value: 'all', label: 'All Artists' },
   { value: 'artist1', label: 'Artist 1' },
   { value: 'artist2', label: 'Artist 2' },
 ];
@@ -49,15 +49,19 @@ const defaultFilters: FiltersProps = {
 };
 
 export function BrowseView({ browses }: Props) {
+  const [songs, setSongs] = useState(_songs);
+
   const [sortBy, setSortBy] = useState('featured');
 
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filters, setFilters] = useState<FiltersProps>(defaultFilters);
 
+  const filteredSongs = songs.filter(( song => ))
   const handleOpenFilter = useCallback(() => {
     setOpenFilter(true);
   }, []);
+  console.log(filters);
 
   const handleCloseFilter = useCallback(() => {
     setOpenFilter(false);
@@ -98,7 +102,7 @@ export function BrowseView({ browses }: Props) {
           justifyContent: 'space-between',
         }}
       >
-        <BrowseSearch songs={browses} />
+        <BrowseSearch songs={songs} />
         <Box
           sx={{
             display: 'flex',
@@ -138,20 +142,20 @@ export function BrowseView({ browses }: Props) {
 
 
       <Grid container spacing={3}>
-        {browses.map((browse, index) => {
+        {filteredSongs.map((song, index) => {
           const latestSongLarge = index === 0;
           const latestSong = index === 1 || index === 2;
 
           return (
             <Grid
-              key={browse.id}
+              key={song.id}
               size={{
                 xs: 12,
                 sm: latestSongLarge ? 12 : 6,
                 md: latestSongLarge ? 6 : 3,
               }}
             >
-              <BrowseItem song={browse} latestSong={latestSong} latestSongLarge={latestSongLarge} />
+              <BrowseItem song={song} latestSong={latestSong} latestSongLarge={latestSongLarge} />
             </Grid>
           );
         })}

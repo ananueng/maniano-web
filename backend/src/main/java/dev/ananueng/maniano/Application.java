@@ -14,6 +14,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
+import java.util.concurrent.ThreadLocalRandom;
+
 @SpringBootApplication
 public class Application {
 
@@ -28,9 +31,21 @@ public class Application {
 	@Bean
 	CommandLineRunner runner(SongService songService, PlayService playService, FileService fileService) {
 		return args -> {
+
 			// Songs
-			songService.create(new SongRequestDto("First song", "init artist"));
-			songService.create(new SongRequestDto("Second song", "init artist"));
+			for (int i = 0; i < 24; i++) {
+				int views = ThreadLocalRandom.current().nextInt(1000, 10000);
+				songService.create(new SongRequestDto(
+						"Song " + (i + 1),
+						"Artist " + (i + 1),
+						String.format("/assets/images/avatar/avatar-%d.webp", i + 1),
+						String.format("/assets/images/cover/cover-%d.webp", i + 1),
+						views,
+						ThreadLocalRandom.current().nextInt(0, views),
+						ThreadLocalRandom.current().nextInt(0, views),
+						i % 4 != 0
+				));
+			}
 
 			// Plays
 			playService.create(new PlayRequestDto("First play", 1, null));

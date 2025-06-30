@@ -18,7 +18,7 @@ export type SongProps = {
   id: string;
   title: string;
   artist: string;
-  isPublic: string;
+  isPublic: boolean;
 };
 
 type SongTableRowProps = {
@@ -71,7 +71,7 @@ export function SongTableRow({ row, selected, onSelectRow }: SongTableRowProps) 
         </TableCell> */}
 
         <TableCell>
-          <Label color={(row.isPublic === 'private' && 'default') || 'success'}>{row.isPublic}</Label>
+          <Label color={(!!row.isPublic && 'success') || 'default'}>{row.isPublic && "Public" || "Private"}</Label>
         </TableCell>
 
         <TableCell align="right">

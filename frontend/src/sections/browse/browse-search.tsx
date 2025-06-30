@@ -19,7 +19,9 @@ type ISongItem = {
   id: string;
   title: string;
   artist: string;
-  isPublic: string;
+  genre: string;
+  status: string;
+  isPublic: boolean;
 };
 
 export function BrowseSearch({ songs, sx }: BrowseSearchProps) {

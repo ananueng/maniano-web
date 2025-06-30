@@ -1,10 +1,8 @@
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Radio from '@mui/material/Radio';
 import Badge from '@mui/material/Badge';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
-import { TextField } from '@mui/material';
 import Divider from '@mui/material/Divider';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
@@ -19,11 +17,8 @@ import { Scrollbar } from 'src/components/scrollbar';
 // ----------------------------------------------------------------------
 
 export type FiltersProps = {
-  artist: string[];
-  isPublic: string;
-  minViews: number;
-  minFavorites: number;
-  genre: string;
+  genre: string[];
+  status: string[];
 };
 
 type BrowseFiltersProps = {
@@ -35,9 +30,8 @@ type BrowseFiltersProps = {
   onResetFilter: () => void;
   onSetFilters: (updateState: Partial<FiltersProps>) => void;
   options: {
-    artists: { value: string; label: string }[];
     categories: { value: string; label: string }[];
-    isPublic: { value: string; label: string }[];
+    statuses: { value: string; label: string }[];
   };
 };
 
@@ -51,22 +45,49 @@ export function BrowseFilters({
   onCloseFilter,
   onResetFilter,
 }: BrowseFiltersProps) {
-  const renderArtist = (
+  const renderGenre = (
     <Stack spacing={1}>
-      <Typography variant="subtitle2">Artist</Typography>
+      <Typography variant="subtitle2">Genre</Typography>
+      <RadioGroup>
+        {options.categories.map((option) => (
+          <FormControlLabel
+            key={option.value}
+            value={option.value}
+            control={
+              <Checkbox
+                checked={filters.genre.includes(option.value)}
+                onChange={() => {
+                  const checked = filters.genre.includes(option.value)
+                    ? filters.genre.filter((value) => value !== option.value)
+                    : [...filters.genre, option.value];
+
+                  onSetFilters({ genre: checked });
+                }}
+              />
+            }
+            label={option.label}
+          />
+        ))}
+      </RadioGroup>
+    </Stack>
+  );
+
+  const renderStatus = (
+    <Stack spacing={1}>
+      <Typography variant="subtitle2">Status</Typography>
       <FormGroup>
-        {options.artists.map((option) => (
+        {options.statuses.map((option) => (
           <FormControlLabel
             key={option.value}
             control={
               <Checkbox
-                checked={filters.artist.includes(option.value)}
+                checked={filters.status.includes(option.value)}
                 onChange={() => {
-                  const checked = filters.artist.includes(option.value)
-                    ? filters.artist.filter((value) => value !== option.value)
-                    : [...filters.artist, option.value];
+                  const checked = filters.status.includes(option.value)
+                    ? filters.status.filter((value) => value !== option.value)
+                    : [...filters.status, option.value];
 
-                  onSetFilters({ artist: checked });
+                  onSetFilters({ status: checked });
                 }}
               />
             }
@@ -77,84 +98,63 @@ export function BrowseFilters({
     </Stack>
   );
 
-  const renderGenre = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Genre</Typography>
-      <RadioGroup>
-        {options.categories.map((option) => (
-          <FormControlLabel
-            key={option.value}
-            value={option.value}
-            control={
-              <Radio
-                checked={filters.genre === option.value}
-                onChange={() => onSetFilters({ genre: option.value })}
-              />
-            }
-            label={option.label}
-          />
-        ))}
-      </RadioGroup>
-    </Stack>
-  );
+  // const renderIsPublic = (
+  //   <Stack spacing={1}>
+  //     <Typography variant="subtitle2">Visibility</Typography>
+  //     <RadioGroup>
+  //       {options.isPublic.map((option) => (
+  //         <FormControlLabel
+  //           key={option.value}
+  //           value={option.value}
+  //           control={
+  //             <Radio
+  //               checked={filters.isPublic === option.value}
+  //               onChange={() => onSetFilters({ isPublic: option.value })}
+  //             />
+  //           }
+  //           label={option.label}
+  //         />
+  //       ))}
+  //     </RadioGroup>
+  //   </Stack>
+  // );
 
-  const renderIsPublic = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Visibility</Typography>
-      <RadioGroup>
-        {options.isPublic.map((option) => (
-          <FormControlLabel
-            key={option.value}
-            value={option.value}
-            control={
-              <Radio
-                checked={filters.isPublic === option.value}
-                onChange={() => onSetFilters({ isPublic: option.value })}
-              />
-            }
-            label={option.label}
-          />
-        ))}
-      </RadioGroup>
-    </Stack>
-  );
+  // const renderMinViews = (
+  //   <Stack spacing={1}>
+  //     <Typography variant="subtitle2">Minimum Views</Typography>
+  //     <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //       <TextField
+  //         type="number"
+  //         size="small"
+  //         slotProps={{ htmlInput: { 'min': 0 } }} 
+  //         defaultValue={0}
+  //         value={filters.minViews}
+  //         onChange={(e) => onSetFilters({ minViews: Number(e.target.value) })}
+  //         sx={{ width: 100, marginRight: 1 }}
+  //       />
+  //       <Typography variant="caption">views</Typography>
+  //     </Box>
+  //   </Stack>
+  // );
 
-  const renderMinViews = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Minimum Views</Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <TextField
-          type="number"
-          size="small"
-          slotProps={{ htmlInput: { 'min': 0 } }} 
-          defaultValue={0}
-          value={filters.minViews}
-          onChange={(e) => onSetFilters({ minViews: Number(e.target.value) })}
-          sx={{ width: 100, marginRight: 1 }}
-        />
-        <Typography variant="caption">views</Typography>
-      </Box>
-    </Stack>
-  );
-
-  const renderMinFavorites = (
-    <Stack spacing={1}>
-      <Typography variant="subtitle2">Minimum Favorites</Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <TextField
-          type="number"
-          size="small"
-          slotProps={{ htmlInput: { 'min': 0 } }} 
-          defaultValue={0}
-          value={filters.minFavorites}
-          onChange={(e) => onSetFilters({ minFavorites: Number(e.target.value) })}
-          sx={{ width: 100, marginRight: 1 }}
-          variant="outlined"
-        />
-        <Typography variant="caption">favorites</Typography>
-      </Box>
-    </Stack>
-  );
+  // const renderMinFavorites = (
+  //   <Stack spacing={1}>
+  //     <Typography variant="subtitle2">Minimum Favorites</Typography>
+  //     <Box sx={{ display: 'flex', alignItems: 'center' }}>
+  //       <TextField
+  //         type="number"
+  //         size="small"
+  //         slotProps={{ htmlInput: { 'min': 0 } }} 
+  //         defaultValue={0}
+  //         value={filters.minFavorites}
+  //         onChange={(e) => onSetFilters({ minFavorites: Number(e.target.value) })}
+  //         sx={{ width: 100, marginRight: 1 }}
+  //         variant="outlined"
+  //       />
+  //       <Typography variant="caption">favorites</Typography>
+  //     </Box>
+  //   </Stack>
+  // );
 
   return (
     <>
@@ -209,11 +209,11 @@ export function BrowseFilters({
 
         <Scrollbar>
           <Stack spacing={3} sx={{ p: 3 }}>
-            {renderArtist}
+            {renderStatus}
             {renderGenre}
-            {renderIsPublic}
+            {/* {renderIsPublic}
             {renderMinViews}
-            {renderMinFavorites}
+            {renderMinFavorites} */}
           </Stack>
         </Scrollbar>
       </Drawer>

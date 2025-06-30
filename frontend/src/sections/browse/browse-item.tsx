@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
+import { Label } from 'src/components/label';
 import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
@@ -18,10 +19,12 @@ export type IBrowseItem = {
   id: string;
   title: string;
   artist: string;
+  status: string;
+  genre: string;
   postedAt: string;
   avatarUrl: string;
   coverUrl: string;
-  isPublic: string;
+  isPublic: boolean;
   totalViews: number;
   totalComments: number;
   totalShares: number;
@@ -39,26 +42,32 @@ export function BrowseItem({
   latestSong: boolean;
   latestSongLarge: boolean;
 }) {
-  // const renderAvatar = (
-  //   <Avatar
-  //     alt={song.author.name}
-  //     src={song.author.avatarUrl}
-  //     sx={{
-  //       left: 24,
-  //       zIndex: 9,
-  //       bottom: -24,
-  //       position: 'absolute',
-  //       ...((latestSongLarge || latestSong) && {
-  //         top: 24,
-  //       }),
-  //     }}
-  //   />
-  // );
+  const statusColorMap: Record<string, 'success' | 'error' | 'warning' | 'info' | 'default'> = {
+    verified: 'success',
+    archived: 'default',
+    pending: 'info',
+  };
+
+  const renderStatus = (
+    <Label
+      variant="inverted"
+      color={statusColorMap[song.status] || 'default'}
+      sx={{
+        position: 'absolute',
+        top: 16,
+        left: 16,
+        zIndex: 9,
+        textTransform: 'capitalize',
+      }}
+    >
+      {song.status}
+    </Label>
+  );
 
   const renderTitle = (
     <Link
       color="inherit"
-      variant="subtitle2"
+      variant="subtitle1"
       underline="hover"
       sx={{
         overflow: 'hidden',
@@ -73,39 +82,6 @@ export function BrowseItem({
     >
       {song.title}
     </Link>
-  );
-
-  const renderInfo = (
-    <Box
-      sx={{
-        mt: 3,
-        gap: 1.5,
-        display: 'flex',
-        flexWrap: 'wrap',
-        color: 'text.disabled',
-        justifyContent: 'flex-end',
-      }}
-    >
-      {[
-        { number: song.totalViews, icon: 'solar:eye-bold' },
-        { number: song.totalFavorites, icon: 'solar:star-bold' },
-        // { number: song.totalShares, icon: 'solar:share-bold' },
-      ].map((info, _index) => (
-        <Box
-          key={_index}
-          sx={{
-            display: 'flex',
-            ...((latestSongLarge || latestSong) && {
-              opacity: 0.64,
-              color: 'common.white',
-            }),
-          }}
-        >
-          <Iconify width={16} icon={info.icon as IconifyName} sx={{ mr: 0.5 }} />
-          <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
-        </Box>
-      ))}
-    </Box>
   );
 
   const renderCover = (
@@ -125,19 +101,61 @@ export function BrowseItem({
 
   const renderArtist = (
     <Typography
-      variant="caption"
+      variant="body2"
       component="div"
       sx={{
-        mt: 1,
-        color: 'text.disabled',
+        color: 'inherit',
         ...((latestSongLarge || latestSong) && {
-          opacity: 0.48,
           color: 'common.white',
         }),
       }}
     >
       {song.artist}
     </Typography>
+  );
+
+  
+  const renderInfo = (
+    <Box
+      sx={{
+        mt: 1,
+        display: 'flex',
+        alignItems: 'center',
+        color: 'text.disabled',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Typography variant="caption">
+        {song.genre.charAt(0).toUpperCase() + song.genre.slice(1)}
+      </Typography>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 1.5,
+          alignItems: 'center',
+        }}
+      >
+        {[
+          { number: song.totalViews, icon: 'solar:eye-bold' },
+          { number: song.totalFavorites, icon: 'eva:star-outline' },
+        ].map((info, _index) => (
+          <Box
+            key={_index}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              ...((latestSongLarge || latestSong) && {
+                opacity: 0.64,
+                color: 'common.white',
+              }),
+            }}
+          >
+            <Iconify width={16} icon={info.icon as IconifyName} sx={{ mr: 0.5 }} />
+            <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+          </Box>
+        ))}
+      </Box>
+    </Box>
   );
 
   // const renderShape = (
@@ -182,7 +200,7 @@ export function BrowseItem({
         })}
       >
         {/* {renderShape} */}
-        {/* {renderAvatar} */}
+        {renderStatus}
         {renderCover}
       </Box>
 

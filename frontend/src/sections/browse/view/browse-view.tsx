@@ -17,47 +17,53 @@ import type { IBrowseItem } from '../browse-item';
 import type { FiltersProps } from '../browse-filters';
 // ----------------------------------------------------------------------
 
+function isEqualArray(a: string[], b: string[]) {
+  if (a.length !== b.length) return false;
+  return a.every((val, idx) => val === b[idx]);
+}
+
 type Props = {
   browses: IBrowseItem[];
 };
 
-const ARTIST_OPTIONS = [
-  { value: 'artist1', label: 'Artist 1' },
-  { value: 'artist2', label: 'Artist 2' },
+const STATUS_OPTIONS = [
+  { value: 'pending', label: 'Pending' },
+  { value: 'verified', label: 'Verified' },
+  { value: 'archived', label: 'Archived' },
 ];
 
 const GENRE_OPTIONS = [
-  { value: 'all', label: 'All' },
   { value: 'classical', label: 'Classical' },
   { value: 'pop', label: 'Pop' },
   { value: 'rock', label: 'Rock' },
   { value: 'jazz', label: 'Jazz' },
 ];
 
-const IS_PUBLIC_OPTIONS = [
-  { value: '', label: 'All' },
-  { value: 'true', label: 'Public' },
-  { value: 'false', label: 'Private' },
-];
-
 const defaultFilters: FiltersProps = {
-  artist: [],
-  isPublic: '',
-  minViews: 0,
-  minFavorites: 0,
-  genre: 'all',
+  genre: [],
+  status: [],
 };
 
 export function BrowseView({ browses }: Props) {
   const [songs, setSongs] = useState(_songs);
 
+  console.log('songs', songs);
   const [sortBy, setSortBy] = useState('featured');
 
   const [openFilter, setOpenFilter] = useState(false);
 
   const [filters, setFilters] = useState<FiltersProps>(defaultFilters);
 
-  const filteredSongs = songs.filter(( song => ))
+  const filteredSongs = songs.filter((song) => {
+    if (filters.status.length > 0 && !filters.status.includes(song.status)) {
+      return false;
+    }
+    if (filters.genre.length > 0 && !filters.genre.includes(song.genre)) {
+      return false;
+    }
+    return true;
+  });
+
   const handleOpenFilter = useCallback(() => {
     setOpenFilter(true);
   }, []);
@@ -75,10 +81,15 @@ export function BrowseView({ browses }: Props) {
     setFilters((prevValue) => ({ ...prevValue, ...updateState }));
   }, []);
 
-  const canReset = Object.keys(filters).some(
-    (key) => filters[key as keyof FiltersProps] !== defaultFilters[key as keyof FiltersProps]
-  );
+  const canReset = Object.keys(filters).some((key) => {
+    const filterValue = filters[key as keyof FiltersProps];
+    const defaultValue = defaultFilters[key as keyof FiltersProps];
 
+    if (Array.isArray(filterValue) && Array.isArray(defaultValue)) {
+      return !isEqualArray(filterValue, defaultValue);
+    }
+    return filterValue !== defaultValue;
+  });
 
   return (
     <DashboardContent>
@@ -90,7 +101,7 @@ export function BrowseView({ browses }: Props) {
         }}
       >
         <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          Song Listing
+          Browse Songs
         </Typography>
       </Box>
 
@@ -119,9 +130,8 @@ export function BrowseView({ browses }: Props) {
             onCloseFilter={handleCloseFilter}
             onResetFilter={() => setFilters(defaultFilters)}
             options={{
-              artists: ARTIST_OPTIONS,
+              statuses: STATUS_OPTIONS,
               categories: GENRE_OPTIONS,
-              isPublic: IS_PUBLIC_OPTIONS,
             }}
           />
 

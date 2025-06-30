@@ -54,15 +54,33 @@ export function BrowseView({ browses }: Props) {
 
   const [filters, setFilters] = useState<FiltersProps>(defaultFilters);
 
-  const filteredSongs = songs.filter((song) => {
-    if (filters.status.length > 0 && !filters.status.includes(song.status)) {
-      return false;
-    }
-    if (filters.genre.length > 0 && !filters.genre.includes(song.genre)) {
-      return false;
-    }
-    return true;
-  });
+  const filteredSongs = songs
+    .filter((song) => {
+      if (filters.status.length > 0 && !filters.status.includes(song.status)) {
+        return false;
+      }
+      if (filters.genre.length > 0 && !filters.genre.includes(song.genre)) {
+        return false;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case 'newest':
+          return new Date(b.postedAt).getTime() - new Date(a.postedAt).getTime();
+        case 'mostViewed':
+          return (b.totalViews || 0) - (a.totalViews || 0);
+        case 'leastViewed':
+          return (a.totalViews || 0) - (b.totalViews || 0);
+        case 'mostFavorited':
+          return (b.totalFavorites || 0) - (a.totalFavorites || 0);
+        case 'leastFavorited':
+          return (a.totalFavorites || 0) - (b.totalFavorites || 0);
+        case 'featured':
+        default:
+          return 0;
+      }
+    });
 
   const handleOpenFilter = useCallback(() => {
     setOpenFilter(true);
@@ -141,10 +159,10 @@ export function BrowseView({ browses }: Props) {
             options={[
               { value: 'featured', label: 'Featured' },
               { value: 'newest', label: 'Newest' },
-              { value: 'mostViewed', label: 'Most Viewed' },
-              { value: 'leastViewed', label: 'Least Viewed' },
-              { value: 'mostFavorited', label: 'Most Favorited' },
-              { value: 'leastFavorited', label: 'Least Favorited' },
+              { value: 'mostViewed', label: 'Most viewed' },
+              { value: 'leastViewed', label: 'Least viewed' },
+              { value: 'mostFavorited', label: 'Most favorited' },
+              { value: 'leastFavorited', label: 'Least favorited' },
             ]}
           />
         </Box>

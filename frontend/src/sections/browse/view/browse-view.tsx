@@ -47,7 +47,9 @@ const defaultFilters: FiltersProps = {
 export function BrowseView({ browses }: Props) {
   const [songs, setSongs] = useState(_songs);
 
-  console.log('songs', songs);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // console.log('songs', songs);
   const [sortBy, setSortBy] = useState('featured');
 
   const [openFilter, setOpenFilter] = useState(false);
@@ -56,6 +58,9 @@ export function BrowseView({ browses }: Props) {
 
   const filteredSongs = songs
     .filter((song) => {
+      if (searchQuery && !song.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+        return false;
+      }
       if (filters.status.length > 0 && !filters.status.includes(song.status)) {
         return false;
       }
@@ -81,6 +86,10 @@ export function BrowseView({ browses }: Props) {
           return 0;
       }
     });
+  
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
 
   const handleOpenFilter = useCallback(() => {
     setOpenFilter(true);
@@ -131,7 +140,7 @@ export function BrowseView({ browses }: Props) {
           justifyContent: 'space-between',
         }}
       >
-        <BrowseSearch songs={songs} />
+        <BrowseSearch songs={songs} handleSearch={handleSearch} />
         <Box
           sx={{
             display: 'flex',

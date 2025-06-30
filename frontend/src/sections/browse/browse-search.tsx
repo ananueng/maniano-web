@@ -13,6 +13,7 @@ import { Iconify } from 'src/components/iconify';
 type BrowseSearchProps = {
   songs: ISongItem[];
   sx?: SxProps<Theme>;
+  handleSearch?: (query: string) => void;
 };
 
 type ISongItem = {
@@ -24,9 +25,10 @@ type ISongItem = {
   isPublic: boolean;
 };
 
-export function BrowseSearch({ songs, sx }: BrowseSearchProps) {
+export function BrowseSearch({ songs, sx, handleSearch }: BrowseSearchProps) {
   return (
     <Autocomplete
+    // todo: freesolo
       sx={{ width: 280 }}
       autoHighlight
       popupIcon={null}
@@ -44,6 +46,11 @@ export function BrowseSearch({ songs, sx }: BrowseSearchProps) {
       options={songs}
       getOptionLabel={(song) => song.title}
       isOptionEqualToValue={(option, value) => option.id === value.id}
+      onInputChange={(_, value) => {
+        if (handleSearch) {
+          handleSearch(value);
+        }
+      }}
       renderInput={(params) => (
         <TextField
           {...params}

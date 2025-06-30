@@ -23,20 +23,20 @@ export const navData = [
     // ),
   },
   {
+    title: 'Player',
+    path: '/player',
+    icon: icon('ic-analytics'),
+  },
+  {
     title: 'My Songs',
     path: '/mySongs',
     icon: icon('ic-user'),
   },
-  {
-    title: 'Editor',
-    path: '/editor',
-    icon: icon('ic-analytics'),
-  },
-  {
-    title: 'Blog',
-    path: '/blog',
-    icon: icon('ic-blog'),
-  },
+  // {
+  //   title: 'Blog',
+  //   path: '/blog',
+  //   icon: icon('ic-blog'),
+  // },
   {
     title: 'Sign in',
     path: '/sign-in',

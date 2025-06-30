@@ -9,7 +9,7 @@
 ## Pages
 
 - [Songs](https://free.minimals.cc/)
-- [Editor](https://free.minimals.cc/user)
+- [Player](https://free.minimals.cc/user)
 - [Products](https://free.minimals.cc/products)
 - [Blog](https://free.minimals.cc/blog)
 - [Sign in](https://free.minimals.cc/sign-in)

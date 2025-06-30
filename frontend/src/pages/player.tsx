@@ -1,6 +1,6 @@
 import { CONFIG } from 'src/config-global';
 
-import { OverviewAnalyticsView as EditorView } from 'src/sections/overview/view';
+import { OverviewAnalyticsView as PlayerView } from 'src/sections/overview/view';
 
 // ----------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ export default function Page() {
     <>
       <title>{`Editor - ${CONFIG.appName}`}</title>
 
-      <EditorView />
+      <PlayerView />
     </>
   );
 }

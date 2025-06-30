@@ -8,6 +8,8 @@ import Link from '@mui/material/Link';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 
+import { RouterLink } from 'src/routes/components';
+
 import { fShortenNumber } from 'src/utils/format-number';
 
 import { Label } from 'src/components/label';
@@ -68,7 +70,7 @@ export function BrowseItem({
     <Link
       color="inherit"
       variant="subtitle1"
-      underline="hover"
+      underline="none"
       sx={{
         overflow: 'hidden',
         WebkitLineClamp: 2,
@@ -114,7 +116,7 @@ export function BrowseItem({
     </Typography>
   );
 
-  
+
   const renderInfo = (
     <Box
       sx={{
@@ -175,49 +177,63 @@ export function BrowseItem({
   // );
 
   return (
-    <Card sx={sx} {...other}>
-      <Box
-        sx={(theme) => ({
-          position: 'relative',
-          pt: 'calc(100% * 3 / 4)',
-          ...((latestSongLarge || latestSong) && {
-            pt: 'calc(100% * 4 / 3)',
-            '&:after': {
-              top: 0,
-              content: "''",
-              width: '100%',
-              height: '100%',
-              position: 'absolute',
-              bgcolor: varAlpha(theme.palette.grey['900Channel'], 0.72),
-            },
-          }),
-          ...(latestSongLarge && {
-            pt: {
-              xs: 'calc(100% * 4 / 3)',
-              sm: 'calc(100% * 3 / 4.66)',
-            },
-          }),
-        })}
-      >
-        {/* {renderShape} */}
-        {renderStatus}
-        {renderCover}
-      </Box>
+    <Link
+      component={RouterLink}
+      href={`/song/${song.id}`}
+      underline="none"
+      sx={{
+        display: 'block',
+        cursor: 'pointer',
+        '&:hover .MuiCard-root': {
+          boxShadow: 16,
+          transform: 'scale(1.02)',
+        },
+      }}
+    >
+      <Card sx={sx} {...other}>
+        <Box
+          sx={(theme) => ({
+            position: 'relative',
+            pt: 'calc(100% * 3 / 4)',
+            ...((latestSongLarge || latestSong) && {
+              pt: 'calc(100% * 4 / 3)',
+              '&:after': {
+                top: 0,
+                content: "''",
+                width: '100%',
+                height: '100%',
+                position: 'absolute',
+                bgcolor: varAlpha(theme.palette.grey['900Channel'], 0.72),
+              },
+            }),
+            ...(latestSongLarge && {
+              pt: {
+                xs: 'calc(100% * 4 / 3)',
+                sm: 'calc(100% * 3 / 4.66)',
+              },
+            }),
+          })}
+        >
+          {/* {renderShape} */}
+          {renderStatus}
+          {renderCover}
+        </Box>
 
-      <Box
-        sx={(theme) => ({
-          p: theme.spacing(2, 2, 2, 2),
-          ...((latestSongLarge || latestSong) && {
-            width: 1,
-            bottom: 0,
-            position: 'absolute',
-          }),
-        })}
-      >
-        {renderTitle}
-        {renderArtist}
-        {renderInfo}
-      </Box>
-    </Card>
+        <Box
+          sx={(theme) => ({
+            p: theme.spacing(2, 2, 2, 2),
+            ...((latestSongLarge || latestSong) && {
+              width: 1,
+              bottom: 0,
+              position: 'absolute',
+            }),
+          })}
+        >
+          {renderTitle}
+          {renderArtist}
+          {renderInfo}
+        </Box>
+      </Card>
+    </Link>
   );
 }

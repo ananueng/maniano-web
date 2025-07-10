@@ -34,7 +34,7 @@ public class File extends BaseEntity {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "play_id", nullable = false)
+    @JoinColumn(name = "play_id", nullable = true)
     private Play play;
 
     // @JsonProperty("fileId")

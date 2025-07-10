@@ -1,9 +1,9 @@
 ### Create Block Project 1
-POST http://localhost:8080/api/projects
+POST http://localhost:8080/api/files
 Content-Type: application/json
 
 {
-  "title": "BLOCK",
+  "name": "test",
   "description": "init BLOCK artist"
 }
 

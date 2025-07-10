@@ -1,5 +1,5 @@
 ### Find all Projects
-GET http://localhost:8080/api/projects
+GET http://localhost:8080/api/files
 
 ### Final all Projects (for landing page)
 GET http://localhost:8080/api/projects/list
